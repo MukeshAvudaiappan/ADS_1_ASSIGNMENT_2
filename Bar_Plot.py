@@ -58,10 +58,10 @@ def filter_barplot_data(df):
 
 #Reading data from csv file to two dataframes using the function read_file(filename)
 
-forest_area, forest_area_transpose = read_file('forest_area.csv')
+forest_area, forest_area_transpose = read_file('CSV_Files/forest_area.csv')
 forest_area = filter_barplot_data(forest_area)
 
-population_growth, population_growth_transpose = read_file('population_growth.csv')
+population_growth, population_growth_transpose = read_file('CSV_Files/population_growth.csv')
 population_growth = filter_barplot_data(population_growth)
 
 #Function to plot bar graph
