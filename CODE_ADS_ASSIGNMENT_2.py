@@ -96,7 +96,8 @@ def co2_emission_mean():
     transpose = transpose.drop(index='Indicator Code')
     # replacing NaN values with 0 for calculating average emission
     cleaned_data = transpose.fillna(0)
-    mean = cleaned_data[['Pakistan', 'Sri Lanka', 'India', 'Afghanistan', 'Vietnam']].mean()
+    mean = cleaned_data[['Pakistan', 'Sri Lanka', 
+                         'India', 'Afghanistan', 'Vietnam']].mean()
     return mean
 
 
@@ -105,14 +106,14 @@ def co2_emission_mean():
 forest_area, forest_area_transpose = read_file('CSV_Files/forest_area.csv')
 forest_area = filter_barplot_data(forest_area)
 
-population_growth, population_growth_transpose = read_file('CSV_Files/population_growth.csv')
-population_growth = filter_barplot_data(population_growth)
+pop_growth, pop_growth_trans = read_file('CSV_Files/population_growth.csv')
+pop_growth = filter_barplot_data(pop_growth)
 
 CO2_emission, CO2_emission_transpose = read_file('CSV_Files/co2_emission.csv')
 CO2_emission = filter_lineplot_data(CO2_emission)
 
-access_to_electricity, access_to_electricity_transpose = read_file('CSV_Files/access_to_electricity.csv')
-access_to_electricity = filter_lineplot_data(access_to_electricity)
+acs_elect, acs_elect_trans = read_file('CSV_Files/access_to_electricity.csv')
+acs_elect = filter_lineplot_data(acs_elect)
 
 
 #Function to plot bar graph
@@ -134,9 +135,12 @@ def barplot(df, label1, label2):
     x = np.arange(5)
     width = 0.2
 
-    bar1 = ax.bar(x, df["2010"], width, label = 2010, color = "lightseagreen")
-    bar2 = ax.bar(x + width, df["2015"], width, label = 2015, color = "lightsteelblue")
-    bar3 = ax.bar(x + width * 2, df["2020"], width, label = 2020, color = "slategrey")
+    bar1 = ax.bar(x, df["2010"], width, 
+                  label = 2010, color = "lightseagreen")
+    bar2 = ax.bar(x + width, df["2015"], width, 
+                  label = 2015, color = "lightsteelblue")
+    bar3 = ax.bar(x + width * 2, df["2020"], width, 
+                  label = 2020, color = "slategrey")
 
     ax.set_xlabel("Country", fontsize = 40)
     ax.set_ylabel(label1, fontsize = 40)
@@ -172,7 +176,8 @@ def line_plot(df, label1, label2):
     transpose = data.transpose()
     transpose = transpose.drop(index = ['Indicator Name'])
     for i in range(len(countries)):
-        plt.plot(transpose.index, transpose[countries[i]], label = countries[i])
+        plt.plot(transpose.index, transpose[countries[i]], 
+                 label = countries[i])
     plt.title(label2, size = 20)
     plt.xlabel("Year", size = 20)
     plt.ylabel(label1, size = 20)
@@ -188,14 +193,14 @@ def line_plot(df, label1, label2):
 
 barplot(forest_area, 
         "Forest Area (% of land area)", "Forest Area")
-barplot(population_growth, 
+barplot(pop_growth, 
         "Population growth (annual %)", "Population Growth")
 
 # Plotting line graph for forest area and population growth to analyse
 
 line_plot(CO2_emission,
           "CO2 Emission in KT", "CO2 Emissions")
-line_plot(access_to_electricity,
+line_plot(acs_elect,
           "Access to electricity (% of population)", "Access to electricity")
 
 # Statistical function to return the mean of CO2 emission of the countries
