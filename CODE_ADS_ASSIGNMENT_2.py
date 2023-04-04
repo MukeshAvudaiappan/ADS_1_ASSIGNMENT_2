@@ -13,7 +13,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-#Global variable to store selected countries
+#Variable to store selected countries
+
 countries = ['Pakistan', 'Sri Lanka', 'India', 'Afghanistan', 'Vietnam']
 
 
@@ -107,7 +108,7 @@ forest_area = filter_barplot_data(forest_area)
 population_growth, population_growth_transpose = read_file('CSV_Files/population_growth.csv')
 population_growth = filter_barplot_data(population_growth)
 
-CO2_emission, CO2_emission_transpose = read_file("CSV_Files/co2_emission.csv")
+CO2_emission, CO2_emission_transpose = read_file('CSV_Files/co2_emission.csv')
 CO2_emission = filter_lineplot_data(CO2_emission)
 
 access_to_electricity, access_to_electricity_transpose = read_file('CSV_Files/access_to_electricity.csv')
@@ -133,19 +134,19 @@ def barplot(df, label1, label2):
     x = np.arange(5)
     width = 0.2
 
-    bar1 = ax.bar(x, df["2010"], width, label=2010, color="lightseagreen")
-    bar2 = ax.bar(x + width, df["2015"], width, label=2015, color="lightsteelblue")
-    bar3 = ax.bar(x + width*2, df["2020"], width, label=2020, color="slategrey")
+    bar1 = ax.bar(x, df["2010"], width, label = 2010, color = "lightseagreen")
+    bar2 = ax.bar(x + width, df["2015"], width, label = 2015, color = "lightsteelblue")
+    bar3 = ax.bar(x + width * 2, df["2020"], width, label = 2020, color = "slategrey")
 
-    ax.set_xlabel("Country", fontsize=40)
-    ax.set_ylabel(label1, fontsize=40)
-    ax.set_title(label2, fontsize=40)
-    ax.set_xticks(x, countries, fontsize=30, rotation=45)
-    ax.legend(fontsize=30)
+    ax.set_xlabel("Country", fontsize = 40)
+    ax.set_ylabel(label1, fontsize = 40)
+    ax.set_title(label2, fontsize = 40)
+    ax.set_xticks(x, countries, fontsize = 30, rotation = 45)
+    ax.legend(fontsize = 30)
 
-    ax.bar_label(bar1, padding=2, rotation=90, fontsize=25)
-    ax.bar_label(bar2, padding=2, rotation=90, fontsize=25)
-    ax.bar_label(bar3, padding=2, rotation=90, fontsize=25)
+    ax.bar_label(bar1, padding = 2, rotation = 90, fontsize = 25)
+    ax.bar_label(bar2, padding = 2, rotation = 90, fontsize = 25)
+    ax.bar_label(bar3, padding = 2, rotation = 90, fontsize = 25)
     plt.savefig("barplot.png")
     plt.show()
     plt.close()
@@ -165,19 +166,19 @@ def line_plot(df, label1, label2):
     None.
     """
 
-    plt.figure(figsize=(20, 15), layout = 'constrained')
+    plt.figure(figsize = (20, 15), layout = 'constrained')
     plt.rcParams['font.size'] = 20
     data = df.set_index('Country Name')
     transpose = data.transpose()
-    transpose = transpose.drop(index=['Indicator Name'])
+    transpose = transpose.drop(index = ['Indicator Name'])
     for i in range(len(countries)):
-        plt.plot(transpose.index, transpose[countries[i]], label=countries[i])
-    plt.title(label2, size=20)
-    plt.xlabel("Year", size=20)
-    plt.ylabel(label1, size=20)
+        plt.plot(transpose.index, transpose[countries[i]], label = countries[i])
+    plt.title(label2, size = 20)
+    plt.xlabel("Year", size = 20)
+    plt.ylabel(label1, size = 20)
     plt.grid('True')
-    plt.xticks(rotation=50)
-    plt.legend(fontsize=25)
+    plt.xticks(rotation = 50)
+    plt.legend(fontsize = 25)
     plt.savefig("lineplot.png")
     plt.show()
     plt.close()
